@@ -27,7 +27,7 @@ public class CSVReporterExample
             .formatFor(Locale.US)
             .convertRatesTo(TimeUnit.SECONDS)
             .convertDurationsTo(TimeUnit.MILLISECONDS)
-            .build(new File("C:\\Users\\wangwenjun\\IdeaProjects\\Metrics-In-Action"));
+            .build(new File("D:\\Metrics-In-Action"));
 
     private final static ConsoleReporter console = ConsoleReporter.forRegistry(registry)
             .convertRatesTo(TimeUnit.SECONDS)

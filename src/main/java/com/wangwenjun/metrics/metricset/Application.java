@@ -7,18 +7,18 @@ import java.util.concurrent.TimeUnit;
 
 public class Application
 {
-    private final static MetricRegistry registry = new MetricRegistry();
+    private final static MetricRegistry REGISTRY = new MetricRegistry();
 
-    private final static JmxReporter reporter = JmxReporter.forRegistry(registry)
+    private final static JmxReporter REPORTER = JmxReporter.forRegistry(REGISTRY)
             .convertRatesTo(TimeUnit.SECONDS)
             .convertDurationsTo(TimeUnit.SECONDS)
             .build();
 
     public static void main(String[] args) throws InterruptedException
     {
-        reporter.start();
+        REPORTER.start();
         BusinessService businessService = new BusinessService();
-        registry.registerAll(businessService);
+        REGISTRY.registerAll(businessService);
         businessService.start();
         Thread.currentThread().join();
     }

@@ -1,4 +1,4 @@
-package com.wangwenjun.metrics.metric.histograms;
+package com.wangwenjun.metrics.metric.histograms.detail;
 
 import com.codahale.metrics.*;
 

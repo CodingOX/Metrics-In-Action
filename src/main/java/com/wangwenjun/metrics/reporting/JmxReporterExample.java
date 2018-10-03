@@ -6,8 +6,7 @@ import java.util.concurrent.TimeUnit;
 
 import static java.util.concurrent.ThreadLocalRandom.current;
 
-public class JmxReporterExample
-{
+public class JmxReporterExample {
     private final static MetricRegistry registry = new MetricRegistry();
     private final static Counter totalBusiness = new Counter();
     private final static Counter successBusiness = new Counter();
@@ -25,17 +24,14 @@ public class JmxReporterExample
             .convertDurationsTo(TimeUnit.SECONDS)
             .build();
 
-    private final static RatioGauge successGauge = new RatioGauge()
-    {
+    private final static RatioGauge successGauge = new RatioGauge() {
         @Override
-        protected Ratio getRatio()
-        {
+        protected Ratio getRatio() {
             return Ratio.of(successBusiness.getCount(), totalBusiness.getCount());
         }
     };
 
-    static
-    {
+    static {
         registry.register("cloud-disk-upload-total", totalBusiness);
         registry.register("cloud-disk-upload-success", successBusiness);
         registry.register("cloud-disk-upload-failure", failBusiness);
@@ -44,31 +40,25 @@ public class JmxReporterExample
         registry.register("cloud-disk-upload-suc-rate", successGauge);
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         console.start(10, TimeUnit.SECONDS);
         reporter.start();
-        while (true)
-        {
+        while (true) {
             upload(new byte[current().nextInt(10_000)]);
         }
     }
 
-    private static void upload(byte[] buffer)
-    {
+    private static void upload(byte[] buffer) {
         totalBusiness.inc();
         Timer.Context context = timer.time();
-        try
-        {
+        try {
             int x = 1 / current().nextInt(10);
             TimeUnit.MILLISECONDS.sleep(200);
             volumeHisto.update(buffer.length);
             successBusiness.inc();
-        } catch (Exception e)
-        {
+        } catch (Exception e) {
             failBusiness.inc();
-        } finally
-        {
+        } finally {
             context.close();
         }
     }

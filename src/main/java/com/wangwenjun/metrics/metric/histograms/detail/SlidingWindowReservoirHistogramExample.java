@@ -1,28 +1,27 @@
-package com.wangwenjun.metrics.metric.histograms;
+package com.wangwenjun.metrics.metric.histograms.detail;
 
 import com.codahale.metrics.*;
 
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 
-
 /***************************************
  * 最适合的是最近一段时间的数据分布图
  * @author:Alex Wang <br/>
  * @taobao:http://wangwenjun0609.taobao.com
- ***************************************/
-public class SlidingTimeWindowReservoirHistogramExample {
+ */
+public class SlidingWindowReservoirHistogramExample {
     private final static MetricRegistry registry = new MetricRegistry();
     private final static ConsoleReporter reporter = ConsoleReporter.forRegistry(registry)
             .convertRatesTo(TimeUnit.SECONDS)
             .convertDurationsTo(TimeUnit.SECONDS)
             .build();
 
-    private final static Histogram histogram = new Histogram(new SlidingTimeWindowReservoir(30, TimeUnit.SECONDS));
+    private final static Histogram histogram = new Histogram(new SlidingWindowReservoir(50));
 
     public static void main(String[] args) {
         reporter.start(10, TimeUnit.SECONDS);
-        registry.register("SlidingTimeWindowReservoir-Histogram", histogram);
+        registry.register("SlidingWindowReservoir-Histogram", histogram);
         while (true) {
             doSearch();
             randomSleep();

@@ -17,8 +17,11 @@ public class DeadLockHealthCheckExample
         final MetricRegistry registry = new MetricRegistry();
         final ConsoleReporter reporter = ConsoleReporter.forRegistry(registry)
                 .build();
-        registry.gauge("thread-dead-lock-hc", () -> hcRegistry::runHealthChecks);
+
         reporter.start(10, TimeUnit.SECONDS);
+
+        registry.gauge("thread-dead-lock-hc", () -> hcRegistry::runHealthChecks);
+
         Thread.currentThread().join();
     }
 }

@@ -10,18 +10,21 @@
     <version>1.0-SNAPSHOT</version>
 
     <dependencies>
+        <!--核心的统计信息-->
         <dependency>
             <groupId>io.dropwizard.metrics</groupId>
             <artifactId>metrics-core</artifactId>
             <version>3.2.6</version>
         </dependency>
 
+        <!--JVM相关统计-->
         <dependency>
             <groupId>io.dropwizard.metrics</groupId>
             <artifactId>metrics-jvm</artifactId>
             <version>3.2.6</version>
         </dependency>
 
+        <!--健康检查-->
         <dependency>
             <groupId>io.dropwizard.metrics</groupId>
             <artifactId>metrics-healthchecks</artifactId>
@@ -33,7 +36,6 @@
             <artifactId>okhttp</artifactId>
             <version>3.11.0</version>
         </dependency>
-
 
         <dependency>
             <groupId>com.google.guava</groupId>

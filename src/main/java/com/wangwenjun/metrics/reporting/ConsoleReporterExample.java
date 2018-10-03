@@ -50,7 +50,7 @@ public class ConsoleReporterExample
 
     public static void main(String[] args)
     {
-        reporter.start(10, TimeUnit.SECONDS);
+        reporter.start(5, TimeUnit.SECONDS);
         while (true)
         {
             logger.info("====================");
